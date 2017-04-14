@@ -24531,6 +24531,27 @@ ion-navbar.toolbar {
   text-align: center;
 }
 
+#row {
+  left: 20%;
+}
+
 #name {
-  width: 40vw;
+  left: 25%;
+  width: 30vw;
+}
+
+#or {
+  position: absolute;
+  top: 50%;
+}
+
+#pid {
+  position: absolute;
+  top: 30%;
+  right: 10%;
+}
+
+#gender {
+  width: 30vw;
+  right: 10%;
 }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { NavController, NavParams, Slides } from 'ionic-angular';
 
 /*
   Generated class for the Nurse page.
@@ -12,7 +12,7 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'nurse.html'
 })
 export class NursePage {
-
+ @ViewChild(Slides) slides: Slides;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
   }
@@ -21,6 +21,13 @@ export class NursePage {
     console.log('ionViewDidLoad NursePage');
   }
 
- 
+
+next(){
+ this.slides.slideNext();
+} 
+
+back(){
+  this.slides.slidePrev();
+}
 
 }
