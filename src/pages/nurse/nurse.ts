@@ -12,7 +12,7 @@ import { NavController, NavParams, Slides } from 'ionic-angular';
   templateUrl: 'nurse.html'
 })
 export class NursePage {
- @ViewChild(Slides) slides: Slides;
+  @ViewChild(Slides) slides: Slides;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
   }
@@ -20,7 +20,6 @@ export class NursePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad NursePage');
   }
-
 
 next(){
  this.slides.slideNext();
