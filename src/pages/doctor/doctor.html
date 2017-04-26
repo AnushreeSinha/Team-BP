@@ -83,10 +83,10 @@
 		  		<div style="float: left; margin-top:5%">
 					<ion-icon name="arrow-back" on-tap="back()"></ion-icon>
 		  		</div>
-		  		<div style="float: left; width:30vw; height: 50%;">
+		  		<div style="float: left; width:30vw; height:100%;">
 		  			<ion-slides style="padding-left:10%;padding-right:10%;">
 		    			<ion-slide>
-		      				<ion-card>
+		      				<ion-card style="height:280px;">
 		          				<ion-card-header>Hello</ion-card-header>
 		         				<ion-card-content>
 		            				<p>Hi there.</p>
@@ -107,6 +107,16 @@
 		    		<ion-icon name="arrow-forward" on-tap="next()"></ion-icon>
 		  		</div>
 			</div>
+		</ion-col>
+		<ion-col>
+			<ion-card>
+    			<ion-card-header>
+        			Systolic vs Diastolic Chart
+      			</ion-card-header>
+      			<ion-card-content>
+        			<canvas #barCanvas></canvas>
+      			</ion-card-content>
+    		</ion-card>
 		</ion-col>
 	</ion-row>
 </ion-content>
