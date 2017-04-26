@@ -92,6 +92,7 @@ export class DoctorPage {
                 }]
             },
             options: {
+                legend: {display: false},
                 tooltips: {enabled:false},
                 scales: {
                     yAxes: [{
