@@ -115,12 +115,12 @@ export class DoctorPage {
         });
   }
 
-next(){
- this.slides.slideNext();
-} 
+// next(){
+//  this.slides.slideNext();
+// } 
 
-back(){
-  this.slides.slidePrev();
-}
+// back(){
+//   this.slides.slidePrev();
+// }
 
 }
