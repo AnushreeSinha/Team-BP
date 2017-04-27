@@ -20,6 +20,8 @@ export class DoctorPage {
  
   barChart: any;
   jsonData: any;
+  bmiData: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
@@ -51,6 +53,34 @@ export class DoctorPage {
                        {"date": "2009-10-29", "systolic": 120, "diastolic": 72}, 
                        {"date": "2009-10-30", "systolic": 40, "diastolic": 25}, 
                        {"date": "2009-12-01", "systolic": 100, "diastolic": 60}];
+    
+    this.bmiData = [{"date": "1997-04-30", "bmi": 35.8}, 
+                    {"date": "1997-05-01", "bmi": 36.6}, 
+                    {"date": "1997-05-07", "bmi": 36.4}, 
+                    {"date": "1999-12-20", "bmi": 35.4}, 
+                    {"date": "1999-12-21", "bmi": 35.2}, 
+                    {"date": "2001-01-19", "bmi": 34.6}, 
+                    {"date": "2001-01-24", "bmi": 33.4}, 
+                    {"date": "2001-01-25", "bmi": 34.3}, 
+                    {"date": "2001-10-31", "bmi": 33.9}, 
+                    {"date": "2001-11-01", "bmi": 36.3}, 
+                    {"date": "2001-11-02", "bmi": 34.4}, 
+                    {"date": "2001-11-05", "bmi": 34.2},
+                    {"date": "2005-02-09", "bmi": 32.6}, 
+                    {"date": "2005-02-10", "bmi": 33.6}, 
+                    {"date": "2005-02-23", "bmi": 33.8}, 
+                    {"date": "2005-02-24", "bmi": 33.0}, 
+                    {"date": "2005-02-25", "bmi": 33.3}, 
+                    {"date": "2009-04-07", "bmi": 33.9}, 
+                    {"date": "2009-04-08", "bmi": 33.5}, 
+                    {"date": "2009-04-14", "bmi": 34.7}, 
+                    {"date": "2009-04-23", "bmi": 32.5}, 
+                    {"date": "2009-04-24", "bmi": 33.7}, 
+                    {"date": "2009-04-27", "bmi": 32.4}, 
+                    {"date": "2009-04-28", "bmi": 34.1}, 
+                    {"date": "2009-10-29", "bmi": 33.1}, 
+                    {"date": "2009-10-30", "bmi": 34.5}, 
+                    {"date": "2009-12-01", "bmi": 34.4}];
 
     var label_arr = [];
     var systolic_arr = [];
@@ -65,6 +95,7 @@ export class DoctorPage {
                     ];
     var systolic_color = [];
     var white_color = [];
+    var bmi_arr = [];
 
     for (var i = 0; i < this.jsonData.length; i++) { 
         label_arr.push(this.jsonData[i]["date"]);
@@ -72,24 +103,35 @@ export class DoctorPage {
         diastolic_arr.push(this.jsonData[i]["diastolic"]);
         systolic_color.push(color_arr[i%color_arr.length]);
         white_color.push('rgba(255, 255, 255, 1)');
+        bmi_arr.push(this.bmiData[i]["bmi"]);
     }
 
     this.barChart = new Chart(this.barCanvas.nativeElement, {
             type: 'bar',
             data: {
                 labels: label_arr,
-                datasets: [{
-                    data: diastolic_arr,
-                    backgroundColor: white_color,
-                    borderColor: white_color,
-                    borderWidth: 1
-                },
-                {
-                    data: systolic_arr,
-                    backgroundColor: systolic_color,
-                    borderColor: white_color,
-                    borderWidth: 0
-                }]
+                datasets: [
+                    {
+                        type:'line',
+                        data:bmi_arr,
+                        fill:false,
+                        pointBackgroundColor:'rgba(214, 119, 104, 1)',
+                        borderColor:'rgba(214, 119, 104, 0.3)',
+                        borderWidth:1
+                    },
+                    {
+                        data: diastolic_arr,
+                        backgroundColor: white_color,
+                        borderColor: white_color,
+                        borderWidth: 0,
+                    },
+                    {
+                        data: systolic_arr,
+                        backgroundColor: systolic_color,
+                        borderColor: white_color,
+                        borderWidth: 0,
+                    }
+                ]
             },
             options: {
                 legend: {display: false},
@@ -113,14 +155,5 @@ export class DoctorPage {
             }
  
         });
-  }
-
-// next(){
-//  this.slides.slideNext();
-// } 
-
-// back(){
-//   this.slides.slidePrev();
-// }
-
+    }
 }
