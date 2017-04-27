@@ -52,7 +52,7 @@ export class NursePage {
   }
 
   next() {
-    if (document.getElementById("card_next").innerHTML == 'Accept') {
+    if (document.getElementById("card_next").innerHTML == 'Accept' ) {
       console.log("Hellow")
       let body = {
         systolic: this.bpHigh,
@@ -71,7 +71,22 @@ export class NursePage {
     else {
       this.slides.slideNext();
     }
+  }
 
+  accept(){
+    let body = {
+        systolic: this.bpHigh,
+        diastolic: this.bpLow,
+        pid: document.getElementById('pid').innerHTML,
+        height: this.height,
+        weight: this.weight
+      }
+      this.http.post('http://localhost:8000/bpsubmit', JSON.stringify(body)).subscribe(data => {
+        console.log(data);
+        this.back()
+        document.getElementById('guideline').style.visibility = "hidden";
+        document.getElementById('cards').style.visibility = "hidden";
+      })
   }
 
   back() {
