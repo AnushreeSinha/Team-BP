@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, Slides } from 'ionic-angular';
 import { Chart } from 'chart.js';
-
+import { Http, Headers } from '@angular/http';
+import 'rxjs/add/operator/map'
 /*
   Generated class for the Doctor page.
 
@@ -20,10 +21,11 @@ export class DoctorPage {
  
   barChart: any;
   jsonData: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DoctorPage');
+    this.loadUserData()
     this.jsonData = [{"date": "1997-04-30", "systolic": 87, "diastolic": 75}, 
                        {"date": "1997-05-01", "systolic": 107, "diastolic": 67}, 
                        {"date": "1997-05-07", "systolic": 68, "diastolic": 43}, 
@@ -52,6 +54,27 @@ export class DoctorPage {
                        {"date": "2009-10-30", "systolic": 40, "diastolic": 25}, 
                        {"date": "2009-12-01", "systolic": 100, "diastolic": 60}];
 
+    
+  }
+
+loadUserData(){
+     var self = this;
+    this.http.get('http://localhost:8000/get_observations').map(res => res.json()).subscribe(data => {
+      console.log(data);
+      data.dob = '2005-09-03'
+      document.getElementById('name').innerHTML = data.name;
+      document.getElementById('ageData').innerHTML = this.calculateAge(data.dob).toString();
+      document.getElementById('pid').innerHTML = data.pid;
+      document.getElementById('gender').innerHTML = data.gender;
+      document.getElementById('heightData').innerHTML = data.height;
+      document.getElementById('bpLow').innerHTML = data.diastolic;
+      document.getElementById('bpHigh').innerHTML = data.systolic;
+      this.drawChart(data.bp)
+
+    })
+}
+drawChart(json){
+    this.jsonData = json
     var label_arr = [];
     var systolic_arr = [];
     var diastolic_arr = [];
@@ -113,14 +136,10 @@ export class DoctorPage {
             }
  
         });
+}
+
+calculateAge(birthday) { // birthday is a date
+    return (2017 - parseInt(birthday)> 15? 15:2017 - parseInt(birthday));
   }
-
-// next(){
-//  this.slides.slideNext();
-// } 
-
-// back(){
-//   this.slides.slidePrev();
-// }
 
 }

@@ -22,119 +22,171 @@
 
   </ion-item>
   <ion-row>
-    <ion-col>
-      <ion-item id="name">
-        <ion-label floating>Name</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-</ion-col>
-    <ion-col>
-      <ion-item id="or" no-lines>
-        <ion-label text-center>Or</ion-label>
+    <ion-col style="margin-left: 10%;">
+      <ion-item no-lines>
+        <ion-label style="max-width:50px; color:gray">Name: </ion-label>
+        <ion-label style="min-width:250px;" id="name">Satyajeet Arun Gawas Mstreet</ion-label>
       </ion-item>
     </ion-col>
     <ion-col>
-      <ion-item id="pid">
-        <ion-label floating>Patient ID</ion-label>
-        <ion-input></ion-input>
+      <ion-item no-lines>
+        <ion-label style="max-width:40px; color:gray">DOB: </ion-label>
+        <ion-label id="dob" style="max-width:100px;">2017-06-30</ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item no-lines>
+        <ion-label style="max-width:75px; color:gray">Patient ID: </ion-label>
+        <ion-label id="pid" style="min-width:120px;">SMART-1111111</ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item no-lines>
+        <ion-label style="max-width:60px; color:gray">Gender: </ion-label>
+        <ion-label id="gender">male</ion-label>
       </ion-item>
     </ion-col>
   </ion-row>
-<br>
+
 
   <ion-item>
     <ion-icon name="calculator" item-left style="color:#E57063;"></ion-icon>
     <ion-label>Readings
     </ion-label>
   </ion-item>
-  <ion-row>
+
+  <ion-row style="margin-left: 10%;">
     <ion-col>
-      <ion-item style="left:25%;padding-right:20%;">
-        <ion-label floating>Age</ion-label>
-        <ion-input input="number"></ion-input>
-      </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>Weight</ion-label>
+            <ion-input input="number" [(ngModel)]="weight"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>Height (cms)</ion-label>
+            <ion-input input="number" [(ngModel)]="height"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
     </ion-col>
     <ion-col>
-      <ion-item style="padding-left:20%;padding-right:20%;">
-        <ion-label floating>Height (cms)</ion-label>
-        <ion-input input="number"></ion-input>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item id="gender" style=" padding-left:20%;padding-right:20%;">
-        <ion-label floating>Gender</ion-label>
-        <ion-select [(ngModel)]="gender">
-          <ion-option value="f" selected="true">Female</ion-option>
-          <ion-option value="m">Male</ion-option>
-          <ion-option value="o">Other</ion-option>
-        </ion-select>
-      </ion-item>
+      <div style="position:absolute; left:20%; ">
+        <div style="float:left">
+          <ion-item style="width:100px">
+            <ion-label floating>High</ion-label>
+            <ion-input [(ngModel)]="bpHigh"></ion-input>
+          </ion-item>
+        </div>
+        <div style="float:left">
+          <ion-item no-lines>
+            <h1 style="color:#E57063; font-size:50px;padding-top: 100%;">/</h1>
+          </ion-item>
+        </div>
+        <div style="float:left; padding-top:10%;">
+          <ion-item style="width:100px">
+            <ion-label floating>Low</ion-label>
+            <ion-input [(ngModel)]="bpLow"></ion-input>
+          </ion-item>
+        </div>
+        <div style="float:left; padding-top:10%;">
+          <ion-item style="width:100px" no-lines>
+            <ion-label>mmHg</ion-label>
+          </ion-item>
+        </div>
+      </div>
     </ion-col>
   </ion-row>
 
   <br>
 
-  <div style="position:absolute; left:42%; ">
-    <div style="float:left">
-      <ion-item style="width:100px">
-        <ion-label floating>High</ion-label>
-        <ion-input ></ion-input>
-      </ion-item>
+
+
+  <button ion-button color="secondary" outline style="margin-left:48%;margin-top: 5%" (click)='submit()'>Submit</button>
+
+
+  <div id="guideline">
+    <ion-item>
+      <ion-icon name="information-circle" item-left style="color:#E57063;"></ion-icon>
+      <ion-label>Guidelines
+      </ion-label>
+    </ion-item>
+  </div>
+  <div style=" margin-left:7%" id="cards">
+
+    <div style="float: left; width:70vw; height: 80%;">
+      <ion-slides style="padding-left:10%;padding-right:10%;">
+        <ion-slide>
+          <ion-card >
+            <ion-card-header id="title"></ion-card-header>
+            <ion-card-content style="height:200px;">
+              <h2 style="margin-top:30px">Systolic percentile : {{systolic}}</h2>
+              <h2> Diastolic percentile : {{diastolic}}</h2>
+            </ion-card-content>
+            <ion-row>
+              <ion-col>
+                <button ion-button icon-left clear small id="card_next" (click)="next()">Next</button>
+              </ion-col>
+              <ion-col>
+                <button ion-button icon-left clear small (click)="back()">Reset</button>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </ion-slide>
+        <ion-slide>
+          <ion-card >
+            <ion-card-header>Tip 1</ion-card-header>
+            <ion-card-content style="height:200px;">
+              <h2 style="margin-top:40px; margin-left:40px; margin-right:40px">Is the patient fully rested? <br>Measurements should not be taken immediately after patient has been running around.
+                Please make sure they are calm.</h2>
+            </ion-card-content>
+            <ion-row>
+              <ion-col>
+                <button ion-button icon-left clear small id="card_next" (click)="next()">Next</button>
+              </ion-col>
+              <ion-col>
+                <button ion-button icon-left clear small (click)="back()">Reset</button>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </ion-slide>
+         <ion-slide>
+          <ion-card >
+            <ion-card-header>Tip 2</ion-card-header>
+            <ion-card-content style="height:200px;">
+              <h2 style="margin-top:40px; margin-left:40px; margin-right:40px">Do they have the right size cuff on? Please ensure that you are using the proper equipment.</h2>
+            </ion-card-content>
+            <ion-row>
+              <ion-col>
+                <button ion-button icon-left clear small id="card_next" (click)="next()">Next</button>
+              </ion-col>
+              <ion-col>
+                <button ion-button icon-left clear small (click)="back()">Reset</button>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </ion-slide>
+         <ion-slide>
+          <ion-card >
+            <ion-card-header>Tip 3</ion-card-header>
+            <ion-card-content style="height:200px;">
+              <h2 style="margin-top:40px; margin-left:40px; margin-right:40px">Please wait for 5/10 minutes in between each blood pressure reading.</h2>
+            </ion-card-content>
+            <ion-row>
+              <ion-col>
+                <button ion-button icon-left clear small id="card_next" (click)="next()">Accept</button>
+              </ion-col>
+              <ion-col>
+                <button ion-button icon-left clear small (click)="back()">Reset</button>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
     </div>
-    <div style="float:left">
-      <ion-item no-lines>
-        <h1 style="color:#E57063; font-size:50px;padding-top: 100%;">/</h1>
-      </ion-item>
-    </div>
-    <div style="float:left; padding-top:10%;">
-      <ion-item style="width:100px">
-        <ion-label floating>Low</ion-label>
-        <ion-input ></ion-input>
-      </ion-item>
-    </div>
+
   </div>
-  
-    <button ion-button color="secondary" outline style="margin-left:48%;margin-top: 10%">Submit</button>
-  
-  
-  <div>
-  <ion-item>
-    <ion-icon name="information-circle" item-left style="color:#E57063;"></ion-icon>
-    <ion-label>Guidelines
-    </ion-label>
-  </ion-item>
-</div>
-<div style=" margin-left:7%">
-  <div style="float: left; margin-top:5%">
-<ion-icon name="arrow-back" on-tap="back()"></ion-icon>
-  </div>
-  <div style="float: left; width:70vw; height: 40%;">
-  <ion-slides style="padding-left:10%;padding-right:10%;">
-    <ion-slide>
-      <ion-card>
-          <ion-card-header>Hello</ion-card-header>
-          <ion-card-content>
-            <p>
-              Hi there.
-            </p>
-          </ion-card-content>
-      </ion-card>
-    </ion-slide>
-      <ion-slide>
-      <ion-card>
-          <ion-card-header>Bye</ion-card-header>
-          <ion-card-content>
-            <p>
-              Bye there.
-            </p>
-          </ion-card-content>
-      </ion-card>
-    </ion-slide>
-  </ion-slides>
-  </div>
-  <div style="float: left; margin-top:5%">
-    <ion-icon name="arrow-forward" on-tap="next()"></ion-icon>
-  </div>
-</div>
-  
+
 </ion-content>
