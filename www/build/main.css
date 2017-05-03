@@ -24560,22 +24560,3 @@ ion-navbar.toolbar {
 #row {
   left: 20%;
 }
-
-#name {
-  left: 25%;
-}
-
-#or {
-  position: absolute;
-  top: 50%;
-}
-
-#pid {
-  position: absolute;
-  right: 20%;
-}
-
-#gender {
-  width: 30vw;
-  right: 10%;
-}

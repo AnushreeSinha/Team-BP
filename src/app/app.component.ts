@@ -12,7 +12,7 @@ import { DoctorPage } from '../pages/doctor/doctor';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = NursePage;
+  rootPage:any = DoctorPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
